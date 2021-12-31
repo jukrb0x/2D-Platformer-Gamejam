@@ -23,7 +23,7 @@ public class PlayAudioClip : StateMachineBehaviour
     public AudioClip clip;
     float last_t = -1f;
 
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var nt = stateInfo.normalizedTime;
         if (modulus > 0f) nt %= modulus;
