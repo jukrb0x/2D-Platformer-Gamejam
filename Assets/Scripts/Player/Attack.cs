@@ -29,6 +29,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // sword attack
         if (Input.GetKeyDown(KeyCode.J) && canAttack)
         {
             canAttack = false;
@@ -37,6 +38,7 @@ public class Attack : MonoBehaviour
             StartCoroutine(AttackCooldown());
         }
 
+        // throwable attack
         if (Input.GetKeyDown(KeyCode.K))
         {
             Transform objTransform = transform;

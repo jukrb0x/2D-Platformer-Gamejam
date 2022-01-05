@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour {
 	public float speed = 5f;
 
 	public bool isInvincible = false;
-	private bool isHitted = false;
+	private bool isHit = false;
 
 	void Awake () {
 		fallCheck = transform.Find("FallCheck");
@@ -35,9 +35,9 @@ public class Enemy : MonoBehaviour {
 		isPlat = Physics2D.OverlapCircle(fallCheck.position, .2f, 1 << LayerMask.NameToLayer("Default"));
 		isObstacle = Physics2D.OverlapCircle(wallCheck.position, .2f, turnLayerMask);
 
-		if (!isHitted && life > 0 && Mathf.Abs(rb.velocity.y) < 0.5f)
+		if (!isHit && life > 0 && Mathf.Abs(rb.velocity.y) < 0.5f)
 		{
-			if (isPlat && !isObstacle && !isHitted)
+			if (isPlat && !isObstacle && !isHit)
 			{
 				if (facingRight)
 				{
@@ -88,10 +88,10 @@ public class Enemy : MonoBehaviour {
 
 	IEnumerator HitTime()
 	{
-		isHitted = true;
+		isHit = true;
 		isInvincible = true;
 		yield return new WaitForSeconds(0.1f);
-		isHitted = false;
+		isHit = false;
 		isInvincible = false;
 	}
 
