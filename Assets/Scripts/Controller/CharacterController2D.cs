@@ -140,6 +140,7 @@ public class CharacterController2D : MonoBehaviour
     public void Move(float move, bool jump, bool dash)
     {
         if (!canMove) return;
+        // should player dash
         if (dash && canDash && !isWallSliding)
         {
             // dashing
@@ -177,7 +178,7 @@ public class CharacterController2D : MonoBehaviour
             }
         }
 
-        // If the player should jump...
+        // should player jump
         if (m_Grounded && jump)
         {
             // Add a vertical force to the player.
@@ -296,7 +297,7 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
-    IEnumerator DashCooldown()
+    private IEnumerator DashCooldown()
     {
         animator.SetBool("IsDashing", true);
         isDashing = true;
@@ -307,7 +308,7 @@ public class CharacterController2D : MonoBehaviour
         canDash = true;
     }
 
-    IEnumerator Stun(float time)
+    private IEnumerator Stun(float time)
     {
         canMove = false;
         yield return new WaitForSeconds(time);

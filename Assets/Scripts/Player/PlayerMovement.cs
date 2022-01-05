@@ -2,68 +2,72 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
+    public CharacterController2D controller;
+    public Animator animator; // seems to be found itself on the component
 
-	public CharacterController2D controller;
-	public Animator animator;
+    public float runSpeed = 40f;
 
-	public float runSpeed = 40f;
+    float horizontalMove = 0f;
 
-	float horizontalMove = 0f;
-	bool jump = false;
-	bool dash = false;
+    // action is executed: true
+    bool jump = false;
+    bool dash = false;
 
-	//bool dashAxis = false;
-	
-	// Update is called once per frame
-	void Update () {
-		// receive user input on every frame
+    //bool dashAxis = false;
 
-		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+    // Update is called once per frame
+    void Update()
+    {
+        // receive user input on every frame updated
 
-		animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        // GetAxisRaw only returns 
+        // -1, 0, 1
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			jump = true;
-		}
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-		if (Input.GetKeyDown(KeyCode.LeftShift))
-		{
-			dash = true;
-		}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jump = true;
+        }
 
-		/*if (Input.GetAxisRaw("Dash") == 1 || Input.GetAxisRaw("Dash") == -1) //RT in Unity 2017 = -1, RT in Unity 2019 = 1
-		{
-			if (dashAxis == false)
-			{
-				dashAxis = true;
-				dash = true;
-			}
-		}
-		else
-		{
-			dashAxis = false;
-		}
-		*/
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            dash = true;
+        }
 
-	}
+        /*if (Input.GetAxisRaw("Dash") == 1 || Input.GetAxisRaw("Dash") == -1) //RT in Unity 2017 = -1, RT in Unity 2019 = 1
+        {
+            if (dashAxis == false)
+            {
+                dashAxis = true;
+                dash = true;
+            }
+        }
+        else
+        {
+            dashAxis = false;
+        }
+        */
+    }
 
-	public void OnFall()
-	{
-		animator.SetBool("IsJumping", true);
-	}
+    public void OnFall()
+    {
+        animator.SetBool("IsJumping", true);
+    }
 
-	public void OnLanding()
-	{
-		animator.SetBool("IsJumping", false);
-	}
+    public void OnLanding()
+    {
+        animator.SetBool("IsJumping", false);
+    }
 
-	private void FixedUpdate ()
-	{
-		// Move our character
-		controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
-		jump = false;
-		dash = false;
-	}
+    private void FixedUpdate()
+    {
+        // Move our character
+        controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
+        jump = false;
+        dash = false;
+    }
 }
