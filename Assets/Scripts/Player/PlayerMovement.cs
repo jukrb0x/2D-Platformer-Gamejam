@@ -5,25 +5,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
-    public Animator animator; // seems to be found itself on the component
+    public Animator animator;
 
     public float runSpeed = 40f;
 
     float horizontalMove = 0f;
-
-    // action is executed: true
     bool jump = false;
     bool dash = false;
+    [SerializeField] private bool canDash = false;
 
     //bool dashAxis = false;
 
     // Update is called once per frame
     void Update()
     {
-        // receive user input on every frame updated
-
-        // GetAxisRaw only returns 
-        // -1, 0, 1
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -33,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
             jump = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
             dash = true;
         }
@@ -63,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsJumping", false);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         // Move our character
         controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);

@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour
 	public float dmgValue = 4;
 	public GameObject throwableObject;
 	public Transform attackCheck;
-	private Rigidbody2D m_Rigidbody2D;
+	private Rigidbody2D _rigidbody2D;
 	public Animator animator;
 	public bool canAttack = true;
 	public bool isTimeToCheck = false;
@@ -16,7 +16,7 @@ public class Attack : MonoBehaviour
 
 	private void Awake()
 	{
-		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		_rigidbody2D = GetComponent<Rigidbody2D>();
 	}
 
 	// Start is called before the first frame update
