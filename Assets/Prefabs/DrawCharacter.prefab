@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 114231493902538710}
   animator: {fileID: 95975118031919256}
-  runSpeed: 40
+  runSpeed: 400
   canDash: 0
 --- !u!212 &212971026275759962
 SpriteRenderer:

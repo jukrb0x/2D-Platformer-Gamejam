@@ -24,6 +24,7 @@ public class ThrowableWeapon : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            // give damage to enemy
             collision.gameObject.SendMessage("ApplyDamage", Mathf.Sign(direction.x) * 2f);
             Destroy(gameObject);
         }

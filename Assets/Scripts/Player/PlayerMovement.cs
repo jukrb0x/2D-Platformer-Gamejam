@@ -7,21 +7,30 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public Animator animator;
 
-    public float runSpeed = 40f;
+    public float runSpeed = 400f;
 
-    float horizontalMove = 0f;
+    float horizontalMoveSpeed = 0f;
     bool jump = false;
     bool dash = false;
-    [SerializeField] private bool canDash = false;
+    [SerializeField] private bool canDash = false; // Player Dash Switch
 
-    //bool dashAxis = false;
+    // bool dashAxis = false;
+
+    void FixedUpdate()
+    {
+        // Move player
+        controller.Move(horizontalMoveSpeed * Time.fixedDeltaTime, jump, dash);
+        // after move in each physics calc
+        jump = false;
+        dash = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMoveSpeed = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMoveSpeed));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -48,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         */
     }
 
+    // Hooks
     public void OnFall()
     {
         animator.SetBool("IsJumping", true);
@@ -56,13 +66,5 @@ public class PlayerMovement : MonoBehaviour
     public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
-    }
-
-    void FixedUpdate()
-    {
-        // Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
-        jump = false;
-        dash = false;
     }
 }

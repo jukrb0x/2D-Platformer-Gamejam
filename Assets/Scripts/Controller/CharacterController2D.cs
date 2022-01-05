@@ -136,7 +136,13 @@ public class CharacterController2D : MonoBehaviour
     }
 
 
-    public void Move(float move, bool jump, bool dash)
+    /// <summary>
+    /// Move is called in FixedUpdate
+    /// </summary>
+    /// <param name="moveSpeed">speed to move</param>
+    /// <param name="jump">invoke a jump</param>
+    /// <param name="dash">invoke a dash</param>
+    public void Move(float moveSpeed, bool jump, bool dash)
     {
         if (!canMove) return;
         if (dash && canDash && !isWallSliding)
@@ -157,19 +163,19 @@ public class CharacterController2D : MonoBehaviour
             if (_rigidbody2D.velocity.y < -limitFallSpeed)
                 _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -limitFallSpeed);
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(move * 10f, _rigidbody2D.velocity.y);
+            Vector3 targetVelocity = new Vector2(moveSpeed, _rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character
             _rigidbody2D.velocity = Vector3.SmoothDamp(_rigidbody2D.velocity, targetVelocity, ref velocity,
                 movementSmoothing);
 
             // If the input is moving the player right and the player is facing left...
-            if (move > 0 && !facingRight && !isWallSliding)
+            if (moveSpeed > 0 && !facingRight && !isWallSliding)
             {
                 // ... flip the player.
                 Flip();
             }
             // Otherwise if the input is moving the player left and the player is facing right...
-            else if (move < 0 && facingRight && !isWallSliding)
+            else if (moveSpeed < 0 && facingRight && !isWallSliding)
             {
                 // ... flip the player.
                 Flip();
@@ -213,7 +219,7 @@ public class CharacterController2D : MonoBehaviour
 
             if (isWallSliding)
             {
-                if (move * transform.localScale.x > 0.1f)
+                if (moveSpeed * transform.localScale.x > 0.1f)
                 {
                     StartCoroutine(WaitToEndSliding());
                 }

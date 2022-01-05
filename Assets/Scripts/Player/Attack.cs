@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -31,15 +33,22 @@ public class Attack : MonoBehaviour
         {
             canAttack = false;
             animator.SetBool("IsAttacking", true);
+            // HasExitTime will exit Attacking State in animator
             StartCoroutine(AttackCooldown());
         }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            GameObject throwableWeapon = Instantiate(throwableObject,
-                transform.position + new Vector3(transform.localScale.x * 0.5f, -0.2f),
-                Quaternion.identity) as GameObject;
-            Vector2 direction = new Vector2(transform.localScale.x, 0);
+            Transform objTransform = transform;
+
+            // instantiate a throwable
+            GameObject throwableWeapon =
+                Instantiate(throwableObject,
+                    objTransform.position + new Vector3(objTransform.localScale.x * 0.5f, -0.2f),
+                    Quaternion.identity);
+
+            // set direction of the throwable 
+            Vector2 direction = new Vector2(objTransform.localScale.x, 0);
             throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction;
             throwableWeapon.name = "ThrowableWeapon";
         }
@@ -57,7 +66,7 @@ public class Attack : MonoBehaviour
         Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(attackCheck.position, 0.9f);
         for (int i = 0; i < collidersEnemies.Length; i++)
         {
-            if (collidersEnemies[i].gameObject.tag == "Enemy")
+            if (collidersEnemies[i].gameObject.CompareTag("Enemy"))
             {
                 if (collidersEnemies[i].transform.position.x - transform.position.x < 0)
                 {
