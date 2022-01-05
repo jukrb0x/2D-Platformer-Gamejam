@@ -43,6 +43,7 @@ public class CharacterController2D : MonoBehaviour
     private float jumpWallDistX = 0; // Distance between player and wall
     private bool limitVelOnWallJump = false; // For limit wall jump distance with low fps
 
+    // doing what on ...
     [Header("Events")] [Space] public UnityEvent OnFallEvent;
     public UnityEvent OnLandEvent;
 
@@ -57,11 +58,8 @@ public class CharacterController2D : MonoBehaviour
         animator = GetComponent<Animator>();
 
 
-        if (OnFallEvent == null)
-            OnFallEvent = new UnityEvent();
-
-        if (OnLandEvent == null)
-            OnLandEvent = new UnityEvent();
+        OnFallEvent ??= new UnityEvent(); // when OnFallEvent == null
+        OnLandEvent ??= new UnityEvent();
     }
 
 

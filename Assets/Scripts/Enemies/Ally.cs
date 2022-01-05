@@ -148,16 +148,14 @@ public class Ally : MonoBehaviour
 
 	public void ApplyDamage(float damage)
 	{
-		if (!isInvincible)
-		{
-			float direction = damage / Mathf.Abs(damage);
-			damage = Mathf.Abs(damage);
-			anim.SetBool("Hit", true);
-			life -= damage;
-			transform.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-			transform.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 300f, 100f)); 
-			StartCoroutine(HitTime());
-		}
+		if (isInvincible) return;
+		float direction = damage / Mathf.Abs(damage);
+		damage = Mathf.Abs(damage);
+		anim.SetBool("Hit", true);
+		life -= damage;
+		transform.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+		transform.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 300f, 100f)); 
+		StartCoroutine(HitTime());
 	}
 
 	public void MeleeAttack()

@@ -85,15 +85,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783f8b7882d2d2a42a5b76de9179978f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 400
+  jumpForce: 800
   movementSmoothing: 0.05
-  airControl: 0
+  airControl: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 53
   groundCheck: {fileID: 4291727345091452}
   wallCheck: {fileID: 4986330650710208}
-  canDoubleJump: 1
+  canDoubleJump: 0
   dashForce: 25
   life: 10
   invincible: 0
