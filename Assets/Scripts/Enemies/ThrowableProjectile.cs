@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ public class ThrowableProjectile : MonoBehaviour
     public float speed = 15f;
     public GameObject owner;
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (!hasHit)
