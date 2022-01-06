@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grass : MonoBehaviour
+public class Grass : DestructibleObject
 {
     public ParticleSystem leafParticle;
 
@@ -18,7 +18,7 @@ public class Grass : MonoBehaviour
         }
     }
 
-    public void ApplyDamage(float damage)
+    public override void ApplyDamage(float damage)
     {
         Instantiate(leafParticle, transform.position, Quaternion.identity);
         Destroy(gameObject);
