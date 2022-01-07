@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
         UpdateHealthBar(player.life);
 
         // receive keyboard input
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!gameManager.IsWon && Input.GetKeyDown(KeyCode.Escape))
         {
             if (!gameManager.IsPaused)
             {
@@ -43,6 +43,11 @@ public class UIManager : MonoBehaviour
                 gameManager.Resume();
                 HidePauseMenu();
             }
+        }
+        else if (gameManager.IsWon)
+        {
+            gameManager.Pause();
+            ShowWinnerMenu();
         }
     }
 

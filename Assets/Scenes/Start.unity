@@ -457,7 +457,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &186633660
 GameObject:
@@ -671,49 +671,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 20290961051787748, guid: d975e66254b08984ab50d4c39dcb947f, type: 3}
   m_PrefabInstance: {fileID: 302420223}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &607696644
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 607696646}
-  - component: {fileID: 607696645}
-  m_Layer: 0
-  m_Name: Start Menu Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &607696645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607696644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95dee6a1b327440ebbdcf1e9c2eec3b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &607696646
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607696644}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.642084, y: 0.05016891, z: 51.15259}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &756817537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -727,7 +684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9137875196306619710, guid: c6c20ec8ab69d425588e1db1aa2e7cda, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9137875196306619710, guid: c6c20ec8ab69d425588e1db1aa2e7cda, type: 3}
       propertyPath: m_LocalPosition.x
@@ -783,6 +740,7 @@ GameObject:
   - component: {fileID: 829548008}
   - component: {fileID: 829548007}
   - component: {fileID: 829548006}
+  - component: {fileID: 829548010}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -867,13 +825,25 @@ RectTransform:
   - {fileID: 75427941}
   - {fileID: 186633661}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &829548010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829548005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95dee6a1b327440ebbdcf1e9c2eec3b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1382045055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,7 +1061,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 607696645}
+      - m_Target: {fileID: 829548010}
         m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
         m_MethodName: QuitTheGame
         m_Mode: 1
@@ -1224,7 +1194,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 607696645}
+      - m_Target: {fileID: 829548010}
         m_TargetAssemblyTypeName: StartMenuManager, Assembly-CSharp
         m_MethodName: StartTheGame
         m_Mode: 1
