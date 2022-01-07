@@ -16,7 +16,7 @@ public class CharacterController2D : MonoBehaviour
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool grounded; // Whether or not the player is grounded.
     private Rigidbody2D _rigidbody2D;
-    private bool facingRight = true; // For determining which way the player is currently facing.
+    [SerializeField] private bool spriteFacingRight = true; // For determining which way the player is currently facing.
     private Vector3 velocity = Vector3.zero;
     private float limitFallSpeed = 25f; // Limit fall speed
 
@@ -24,6 +24,7 @@ public class CharacterController2D : MonoBehaviour
 
     [SerializeField] private float dashForce = 25f;
     private bool canDash = true;
+    [SerializeField] private bool canWallSliding = false;
     private bool isDashing = false; // If player is dashing
     private bool isWall = false; // If there is a wall in front of the player
     private bool isWallSliding = false; // If player is sliding in a wall
@@ -56,8 +57,6 @@ public class CharacterController2D : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-
         OnFallEvent ??= new UnityEvent(); // when OnFallEvent == null
         OnLandEvent ??= new UnityEvent();
     }
@@ -169,13 +168,13 @@ public class CharacterController2D : MonoBehaviour
                 movementSmoothing);
 
             // If the input is moving the player right and the player is facing left...
-            if (moveSpeed > 0 && !facingRight && !isWallSliding)
+            if (moveSpeed > 0 && !spriteFacingRight && !isWallSliding)
             {
                 // ... flip the player.
                 Flip();
             }
             // Otherwise if the input is moving the player left and the player is facing right...
-            else if (moveSpeed < 0 && facingRight && !isWallSliding)
+            else if (moveSpeed < 0 && spriteFacingRight && !isWallSliding)
             {
                 // ... flip the player.
                 Flip();
@@ -204,15 +203,18 @@ public class CharacterController2D : MonoBehaviour
 
         else if (isWall && !grounded)
         {
-            if (!oldWallSliding && _rigidbody2D.velocity.y < 0 || isDashing)
+            if (canWallSliding)
             {
-                isWallSliding = true;
-                wallCheck.localPosition =
-                    new Vector3(-wallCheck.localPosition.x, wallCheck.localPosition.y, 0);
-                Flip();
-                StartCoroutine(WaitToCheck(0.1f));
-                canDoubleJump = true;
-                animator.SetBool("IsWallSliding", true);
+                if (!oldWallSliding && _rigidbody2D.velocity.y < 0 || isDashing)
+                {
+                    isWallSliding = true;
+                    wallCheck.localPosition =
+                        new Vector3(-wallCheck.localPosition.x, wallCheck.localPosition.y, 0);
+                    Flip();
+                    StartCoroutine(WaitToCheck(0.1f));
+                    canDoubleJump = true;
+                    animator.SetBool("IsWallSliding", true);
+                }
             }
 
             isDashing = false;
@@ -272,7 +274,7 @@ public class CharacterController2D : MonoBehaviour
     private void Flip()
     {
         // Switch the way the player is labelled as facing.
-        facingRight = !facingRight;
+        spriteFacingRight = !spriteFacingRight;
 
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
@@ -280,24 +282,23 @@ public class CharacterController2D : MonoBehaviour
         transform.localScale = theScale;
     }
 
+    // character is under attack
     public void ApplyDamage(float damage, Vector3 position)
     {
-        if (!invincible)
+        if (invincible) return;
+        animator.SetBool("Hit", true);
+        life -= damage;
+        Vector2 damageDir = Vector3.Normalize(transform.position - position) * 40f;
+        _rigidbody2D.velocity = Vector2.zero;
+        _rigidbody2D.AddForce(damageDir * 10);
+        if (life <= 0)
         {
-            animator.SetBool("Hit", true);
-            life -= damage;
-            Vector2 damageDir = Vector3.Normalize(transform.position - position) * 40f;
-            _rigidbody2D.velocity = Vector2.zero;
-            _rigidbody2D.AddForce(damageDir * 10);
-            if (life <= 0)
-            {
-                StartCoroutine(WaitToDead());
-            }
-            else
-            {
-                StartCoroutine(Stun(0.25f));
-                StartCoroutine(MakeInvincible(1f));
-            }
+            StartCoroutine(WaitToDead());
+        }
+        else
+        {
+            StartCoroutine(Stun(0.25f));
+            StartCoroutine(MakeInvincible(1f));
         }
     }
 

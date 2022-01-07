@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour {
 	public LayerMask turnLayerMask;
 	private Rigidbody2D rb;
 
-	private bool facingRight = true;
+	[SerializeField] private bool facingRight = true;
 	
 	public float speed = 5f;
 
