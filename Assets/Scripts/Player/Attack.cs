@@ -12,6 +12,7 @@ public class Attack : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     public Animator animator;
     public bool canAttack = true;
+    public bool canThrow = false;
     public bool isTimeToCheck = false;
 
     public GameObject cam;
@@ -39,7 +40,7 @@ public class Attack : MonoBehaviour
         }
 
         // throwable attack
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && canThrow)
         {
             Transform objTransform = transform;
 
