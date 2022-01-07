@@ -148,6 +148,7 @@ MonoBehaviour:
   attackCheck: {fileID: 4370582630649528}
   animator: {fileID: 95975118031919256}
   canAttack: 1
+  canThrow: 0
   isTimeToCheck: 0
   cam: {fileID: 0}
 --- !u!114 &114145887554720856
@@ -393,7 +394,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393053470196254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.263, y: 0.6990001, z: 0}
+  m_LocalPosition: {x: -0.296, y: 0.566, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4660076192433278}
@@ -5239,7 +5240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568700092027370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.22, y: 0.6, z: 0}
+  m_LocalPosition: {x: -0.448, y: 0.475, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4660076192433278}

@@ -7,16 +7,16 @@ using Random = UnityEngine.Random;
 public class Ally : MonoBehaviour
 {
     private Rigidbody2D m_Rigidbody2D;
-    [SerializeField] private bool m_FacingRight = true; // For determining which way the player is currently facing.
 
+    [SerializeField]
+    private bool currentFacingRight = true; // For determining which way the player is currently facing.
+
+    private bool isFacingRight = true;
     public float life = 10;
-
-    private bool facingRight = true;
-
     public float speed = 5f;
 
     public bool isInvincible = false;
-    private bool isHitted = false;
+    private bool isHit = false;
 
     [SerializeField] private float m_DashForce = 25f;
     private bool isDashing = false;
@@ -27,6 +27,7 @@ public class Ally : MonoBehaviour
     public float meleeDist = 1.5f;
     public float rangeDist = 5f;
     private bool canAttack = true;
+    [SerializeField] private bool canDash = false; // TODO temp disable dash
     private Transform attackCheck;
     public float dmgValue = 4;
 
@@ -44,6 +45,11 @@ public class Ally : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        isFacingRight = currentFacingRight; // sync at the start
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -57,9 +63,10 @@ public class Ally : MonoBehaviour
             {
                 m_Rigidbody2D.velocity = new Vector2(transform.localScale.x * m_DashForce, 0);
             }
-            else if (!isHitted)
+            else if (!isHit)
             {
-                distToPlayer = enemy.transform.position.x - transform.position.x;
+                distToPlayer =
+                    enemy.transform.position.x - transform.position.x; // >0 is right to player, <0 is left to player
                 distToPlayerY = enemy.transform.position.y - transform.position.y;
 
                 if (Mathf.Abs(distToPlayer) < 0.25f)
@@ -71,8 +78,8 @@ public class Ally : MonoBehaviour
                          Mathf.Abs(distToPlayerY) < 2f)
                 {
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0f, m_Rigidbody2D.velocity.y);
-                    if ((distToPlayer > 0f && transform.localScale.x < 0f) ||
-                        (distToPlayer < 0f && transform.localScale.x > 0f))
+                    if ((distToPlayer > 0f && transform.localScale.x > 0f) || // facing right but player is left
+                        (distToPlayer < 0f && transform.localScale.x < 0f)) // facing left but player is right
                         Flip();
                     if (canAttack)
                     {
@@ -97,7 +104,7 @@ public class Ally : MonoBehaviour
                             Run();
                         else if (randomDecision >= 0.4f && randomDecision < 0.6f)
                             Jump();
-                        else if (randomDecision >= 0.6f && randomDecision < 0.8f)
+                        else if (randomDecision >= 0.6f && randomDecision < 0.8f && canDash)
                             StartCoroutine(Dash());
                         else if (randomDecision >= 0.8f && randomDecision < 0.95f)
                             RangeAttack();
@@ -110,30 +117,35 @@ public class Ally : MonoBehaviour
                     }
                 }
             }
-            else if (isHitted)
+            else if (isHit)
             {
                 if ((distToPlayer > 0f && transform.localScale.x > 0f) ||
                     (distToPlayer < 0f && transform.localScale.x < 0f))
                 {
                     Flip();
+                    if (canDash)
+                    {
+                        StartCoroutine(Dash());
+                    }
+                }
+                else if (canDash)
+                {
                     StartCoroutine(Dash());
                 }
-                else
-                    StartCoroutine(Dash());
             }
         }
         else
         {
-            enemy = GameObject.Find("DrawCharacter"); // FIXME find player
+            enemy = GameObject.Find("Player"); // TODO FIXME find player
         }
 
-        if (transform.localScale.x * m_Rigidbody2D.velocity.x > 0 && !m_FacingRight && life > 0)
+        if (transform.localScale.x * m_Rigidbody2D.velocity.x > 0 && !currentFacingRight && life > 0)
         {
             // ... flip the player.
             Flip();
         }
         // Otherwise if the input is moving the player left and the player is facing right...
-        else if (transform.localScale.x * m_Rigidbody2D.velocity.x < 0 && m_FacingRight && life > 0)
+        else if (transform.localScale.x * m_Rigidbody2D.velocity.x < 0 && currentFacingRight && life > 0)
         {
             // ... flip the player.
             Flip();
@@ -143,7 +155,7 @@ public class Ally : MonoBehaviour
     void Flip()
     {
         // Switch the way the player is labelled as facing.
-        facingRight = !facingRight;
+        isFacingRight = !isFacingRight;
 
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
@@ -167,7 +179,8 @@ public class Ally : MonoBehaviour
 
     public void MeleeAttack()
     {
-        transform.GetComponent<Animator>().SetBool("Attack", true);
+        // transform.GetComponent<Animator>().SetBool("Attack", true);
+        anim.SetBool("Attack", true);
         Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(attackCheck.position, 0.9f);
         for (int i = 0; i < collidersEnemies.Length; i++)
         {
@@ -244,9 +257,9 @@ public class Ally : MonoBehaviour
     IEnumerator HitTime()
     {
         isInvincible = true;
-        isHitted = true;
+        isHit = true;
         yield return new WaitForSeconds(0.1f);
-        isHitted = false;
+        isHit = false;
         isInvincible = false;
     }
 
