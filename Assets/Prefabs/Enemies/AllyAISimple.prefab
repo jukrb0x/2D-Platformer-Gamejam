@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19daed33242bbb348a96213765c8bc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FacingRight: 0
+  currentFacingRight: 0
   life: 15
   speed: 5
   isInvincible: 0
