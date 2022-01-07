@@ -44,11 +44,13 @@ public class GameManager : MonoBehaviour
     {
         IsPaused = true;
         gameController.PauseTheGame();
+        Cursor.visible = true;
     }
 
     public void Resume()
     {
         IsPaused = false;
         gameController.ResumeTheGame();
+        Cursor.visible = false;
     }
 }

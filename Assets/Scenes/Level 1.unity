@@ -337,6 +337,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114231493902538710, guid: 63b4611f0263d404da1158e39865844b, type: 3}
+      propertyPath: life
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231493902538710, guid: 63b4611f0263d404da1158e39865844b, type: 3}
       propertyPath: invincible
       value: 0
       objectReference: {fileID: 0}
@@ -637,6 +641,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114177091046159370, guid: e379d1f3d7fb9944e8550815cea8fafb, type: 3}
+      propertyPath: dmgValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114177091046159370, guid: e379d1f3d7fb9944e8550815cea8fafb, type: 3}
       propertyPath: m_FacingRight
       value: 0
       objectReference: {fileID: 0}
@@ -776,7 +784,9 @@ MonoBehaviour:
 
     J: attack
 
-    Space: Jump'
+    Space: Jump
+
+    Esc: Pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7e83554607f914914ad916cc6a333f88, type: 2}
   m_sharedMaterial: {fileID: 9094209903713244663, guid: 7e83554607f914914ad916cc6a333f88, type: 2}
@@ -14373,6 +14383,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114177091046159370, guid: e379d1f3d7fb9944e8550815cea8fafb, type: 3}
+      propertyPath: dmgValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114177091046159370, guid: e379d1f3d7fb9944e8550815cea8fafb, type: 3}
       propertyPath: m_FacingRight
       value: 0
       objectReference: {fileID: 0}
@@ -14989,15 +15003,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4633865963506118, guid: e379d1f3d7fb9944e8550815cea8fafb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.844023
+      value: 2.000571
       objectReference: {fileID: 0}
     - target: {fileID: 4633865963506118, guid: e379d1f3d7fb9944e8550815cea8fafb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.844023
+      value: 2.000571
       objectReference: {fileID: 0}
     - target: {fileID: 4633865963506118, guid: e379d1f3d7fb9944e8550815cea8fafb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.844023
+      value: 2.000571
       objectReference: {fileID: 0}
     - target: {fileID: 4633865963506118, guid: e379d1f3d7fb9944e8550815cea8fafb, type: 3}
       propertyPath: m_LocalPosition.x
