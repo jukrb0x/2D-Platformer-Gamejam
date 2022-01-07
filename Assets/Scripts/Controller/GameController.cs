@@ -1,25 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    private void Awake()
+    public void PauseTheGame()
     {
-        throw new NotImplementedException();
+        Time.timeScale = 0;
     }
 
-    private void Start()
+    public void ResumeTheGame()
     {
-        throw new NotImplementedException();
+        Time.timeScale = 1;
     }
-
-    private void Update()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void FixedUpdate()
-    {
-        throw new NotImplementedException();
-    }
+    
 }
