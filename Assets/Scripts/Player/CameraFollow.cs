@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class CameraFollow : MonoBehaviour
     public float shakeAmount = 0.1f;
     public float decreaseFactor = 1.0f;
 
+    [SerializeField] private GameManager gameManager;
+
     Vector3 originalPos;
 
     void Awake()
@@ -30,6 +34,11 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
+
     void OnEnable()
     {
         originalPos = camTransform.localPosition;
@@ -37,6 +46,8 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.IsPaused) return;
+
         Vector3 newPosition = Target.position;
         newPosition.z = -10;
         transform.position = Vector3.Slerp(transform.position, newPosition, FollowSpeed * Time.deltaTime);

@@ -32,7 +32,7 @@ public class Attack : MonoBehaviour
     void Update()
     {
         if (gameManager.IsPaused) return;
-        
+
         // sword attack
         if (Input.GetKeyDown(KeyCode.J) && canAttack)
         {
