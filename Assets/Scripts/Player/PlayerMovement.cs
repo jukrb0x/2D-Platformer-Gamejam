@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (gameManager.IsPaused) return;
-        
         // Move player
         controller.Move(horizontalMoveSpeed * Time.fixedDeltaTime, jump, dash);
         // after move in each physics calc
@@ -37,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.IsPaused) return;
+
         horizontalMoveSpeed = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMoveSpeed));
