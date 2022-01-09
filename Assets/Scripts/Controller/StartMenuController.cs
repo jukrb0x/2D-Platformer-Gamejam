@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartMenuManager : MonoBehaviour
+public class StartMenuController : MonoBehaviour
 {
     private GameManager gameManager;
 

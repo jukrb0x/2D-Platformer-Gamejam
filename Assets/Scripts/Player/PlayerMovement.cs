@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,19 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool dash = false;
     [SerializeField] private bool canDash = false; // Player Dash Switch
+    [SerializeField] private GameManager gameManager;
 
     // bool dashAxis = false;
 
+    private void Start()
+    {
+        gameManager ??= GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
+
     void FixedUpdate()
     {
+        if (gameManager.IsPaused) return;
+        
         // Move player
         controller.Move(horizontalMoveSpeed * Time.fixedDeltaTime, jump, dash);
         // after move in each physics calc

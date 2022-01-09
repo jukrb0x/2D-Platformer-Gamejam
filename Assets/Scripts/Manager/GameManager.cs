@@ -22,11 +22,8 @@ public class GameManager : MonoBehaviour
     {
         gameController = GetComponent<GameController>();
         IsPaused = false;
-    }
-
-    private void Update()
-    {
-        
+        // make frame per second 60
+        Application.targetFrameRate = 60;
     }
 
     public void EnterNextLevel()

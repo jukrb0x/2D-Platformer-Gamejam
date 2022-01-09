@@ -13,6 +13,7 @@ public class Attack : MonoBehaviour
     public bool canAttack = true;
     public bool canThrow = false;
     public bool isTimeToCheck = false;
+    [SerializeField] private GameManager gameManager;
 
     public GameObject cam;
 
@@ -24,11 +25,14 @@ public class Attack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager ??= GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.IsPaused) return;
+        
         // sword attack
         if (Input.GetKeyDown(KeyCode.J) && canAttack)
         {
