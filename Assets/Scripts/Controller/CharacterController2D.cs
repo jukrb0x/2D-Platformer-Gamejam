@@ -35,6 +35,7 @@ public class CharacterController2D : MonoBehaviour
 
     public float life = 10f; // Life of the player
     public bool invincible = false; // If player can die
+    public bool isGodModeOn = false;
     private bool canMove = true; // If player can move
 
     private Animator animator;
@@ -286,7 +287,7 @@ public class CharacterController2D : MonoBehaviour
     // character is under attack
     public void ApplyDamage(float damage, Vector3 position)
     {
-        if (invincible) return;
+        if (invincible || isGodModeOn) return;
         animator.SetBool("Hit", true);
         life -= damage;
         Vector2 damageDir = Vector3.Normalize(transform.position - position) * 40f;

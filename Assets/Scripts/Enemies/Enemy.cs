@@ -70,16 +70,14 @@ public class Enemy : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
-        if (!isInvincible)
-        {
-            float direction = damage / Mathf.Abs(damage);
-            damage = Mathf.Abs(damage);
-            transform.GetComponent<Animator>().SetBool("Hit", true);
-            life -= damage;
-            rb.velocity = Vector2.zero;
-            rb.AddForce(new Vector2(direction * 500f, 100f));
-            StartCoroutine(HitTime());
-        }
+        if (isInvincible) return;
+        float direction = damage / Mathf.Abs(damage);
+        damage = Mathf.Abs(damage);
+        transform.GetComponent<Animator>().SetBool("Hit", true);
+        life -= damage;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(new Vector2(direction * 500f, 100f));
+        StartCoroutine(HitTime());
     }
 
     void OnCollisionStay2D(Collision2D collision)

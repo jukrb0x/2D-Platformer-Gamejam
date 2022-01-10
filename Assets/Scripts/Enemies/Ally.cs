@@ -27,7 +27,7 @@ public class Ally : MonoBehaviour
     public float meleeDist = 1.5f;
     public float rangeDist = 5f;
     private bool canAttack = true;
-    [SerializeField] private bool canDash = false; // TODO temp disable dash
+    [SerializeField] private bool canDash = true;
     private Transform attackCheck;
     public float dmgValue = 4;
 

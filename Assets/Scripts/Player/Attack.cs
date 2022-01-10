@@ -48,14 +48,15 @@ public class Attack : MonoBehaviour
             Transform objTransform = transform;
 
             // instantiate a throwable
+            var localScale = -objTransform.localScale;
             GameObject throwableWeapon =
                 Instantiate(throwableObject,
-                    objTransform.position + new Vector3(objTransform.localScale.x * 0.5f, -0.2f),
+                    objTransform.position + new Vector3(localScale.x * 0.5f, 1f),
                     Quaternion.identity);
-
+            throwableWeapon.transform.localScale = new Vector2(-localScale.x, 1);
             // set direction of the throwable 
-            Vector2 direction = new Vector2(objTransform.localScale.x, 0);
-            throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction;
+            Vector2 direction = new Vector2(localScale.x, 0);
+            throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction; // < 0 facing right
             throwableWeapon.name = "ThrowableWeapon";
         }
     }

@@ -236,11 +236,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4567782686879236, guid: 061600cc71b08b947a704a7416146101, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.7
+      value: 10.11
       objectReference: {fileID: 0}
     - target: {fileID: 4567782686879236, guid: 061600cc71b08b947a704a7416146101, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.56
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 4567782686879236, guid: 061600cc71b08b947a704a7416146101, type: 3}
       propertyPath: m_LocalPosition.z
@@ -344,10 +344,22 @@ PrefabInstance:
       propertyPath: invincible
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114231493902538710, guid: 63b4611f0263d404da1158e39865844b, type: 3}
+      propertyPath: isGodModeOn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114435281327171648, guid: 63b4611f0263d404da1158e39865844b, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 493736009}
+    - target: {fileID: 114435281327171648, guid: 63b4611f0263d404da1158e39865844b, type: 3}
+      propertyPath: canThrow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114435281327171648, guid: 63b4611f0263d404da1158e39865844b, type: 3}
+      propertyPath: throwableObject
+      value: 
+      objectReference: {fileID: 5532974359214069763, guid: 395b7510d8708499e88f9f1679f31c34, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63b4611f0263d404da1158e39865844b, type: 3}
 --- !u!4 &266693634 stripped
@@ -4737,7 +4749,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9d915bacd5940489aa5799dfe18714dc, type: 2}
+  - {fileID: 2100000, guid: 7f12fb084a8644591ad657bc051630a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
