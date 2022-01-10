@@ -740,7 +740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &790545672
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15248,7 +15248,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5744498743970962579, guid: 87a4ff2fb446e48b9afdfde7b6e95c2b, type: 3}
       propertyPath: m_Name
-      value: UI Canvas
+      value: HUD Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5744498743970962590, guid: 87a4ff2fb446e48b9afdfde7b6e95c2b, type: 3}
       propertyPath: m_Camera
