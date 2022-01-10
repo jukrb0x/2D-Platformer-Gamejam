@@ -4,7 +4,7 @@ using UnityEngine;
 public class Key : MonoBehaviour
 {
     private GameManager gameManager;
-    private KeyType _keyType;
+    [SerializeField] private KeyType _keyType;
 
     private void Start()
     {
@@ -16,6 +16,8 @@ public class Key : MonoBehaviour
         if (!col.CompareTag("Player")) return;
         if (_keyType == KeyType.winnerKey)
             gameManager.IsWon = true;
+        if(_keyType == KeyType.nextLevelKey)
+            gameManager.EnterNextLevel();
     }
 
     enum KeyType

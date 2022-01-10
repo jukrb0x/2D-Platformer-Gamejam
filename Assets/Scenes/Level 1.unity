@@ -894,9 +894,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e221cec006bbf4fb8b2674a285abceda, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1237,7 +1237,7 @@ SpriteRenderer:
   m_SortingLayerID: 598724481
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1792569173449281834, guid: 29853c974512d4747a6493627fc45400, type: 3}
+  m_Sprite: {fileID: -5189982681163505842, guid: 29853c974512d4747a6493627fc45400, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14798,7 +14798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 354898768462671785, guid: cd53e92cebbb24a4c891b60ec331ef72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.006628
+      value: -0.28
       objectReference: {fileID: 0}
     - target: {fileID: 354898768462671785, guid: cd53e92cebbb24a4c891b60ec331ef72, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15076,6 +15076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab691d9920a4698b24b887ad30ea3a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _keyType: 1
 --- !u!1 &1830507190
 GameObject:
   m_ObjectHideFlags: 0
