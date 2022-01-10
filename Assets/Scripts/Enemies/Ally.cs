@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class Ally : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private int scoreAward = 5;
     private Rigidbody2D m_Rigidbody2D;
 
     [SerializeField]
@@ -27,7 +29,7 @@ public class Ally : MonoBehaviour
     public float meleeDist = 1.5f;
     public float rangeDist = 5f;
     private bool canAttack = true;
-    [SerializeField] private bool canDash = false; // TODO temp disable dash
+    [SerializeField] private bool canDash = true;
     private Transform attackCheck;
     public float dmgValue = 4;
 
@@ -48,6 +50,7 @@ public class Ally : MonoBehaviour
     private void Start()
     {
         isFacingRight = currentFacingRight; // sync at the start
+        gameManager ??= FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -174,6 +177,10 @@ public class Ally : MonoBehaviour
             transform.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             transform.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 300f, 100f));
             StartCoroutine(HitTime());
+            if (life <= 0)
+            {
+                gameManager.Score += scoreAward; // add score to player
+            }
         }
     }
 

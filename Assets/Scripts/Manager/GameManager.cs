@@ -5,28 +5,24 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public bool IsPaused { get; set; }
-
     public bool IsWon { get; set; }
+    public bool IsDead { get; set; }
+
+    public int Score { get; set; }
 
     private GameController gameController; // will be added to the GameObject automatically
-
     private Collider2D player;
 
-    private void Awake()
-    {
-        // gameController = GetComponent<GameController>();
-        gameObject.AddComponent<GameController>();
-    }
 
     private void Start()
     {
         gameController = GetComponent<GameController>();
         IsPaused = false;
-    }
-
-    private void Update()
-    {
-        
+        Time.timeScale = 1;
+        // make frame per second 45
+        Application.targetFrameRate = 45;
+        if (GameObject.Find("Game Data").GetComponent<GameData>() != null)
+            Score = GameObject.Find("Game Data").GetComponent<GameData>().ReadScore();
     }
 
     public void EnterNextLevel()
@@ -40,17 +36,17 @@ public class GameManager : MonoBehaviour
         Resume();
     }
 
-    public void Pause()
+    public void Pause(bool cursor = true)
     {
         IsPaused = true;
         gameController.PauseTheGame();
-        Cursor.visible = true;
+        Cursor.visible = cursor;
     }
 
-    public void Resume()
+    public void Resume(bool cursor = false)
     {
         IsPaused = false;
         gameController.ResumeTheGame();
-        Cursor.visible = false;
+        Cursor.visible = cursor;
     }
 }

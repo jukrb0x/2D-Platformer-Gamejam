@@ -10,7 +10,7 @@ public class PauseMenuController : MonoBehaviour
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        uiManager ??= GameObject.Find("UI Canvas").GetComponent<UIManager>();
+        uiManager ??= GameObject.Find("HUD Canvas").GetComponent<UIManager>();
     }
 
     public void ContinueOnClick()
@@ -22,6 +22,7 @@ public class PauseMenuController : MonoBehaviour
     public void ExitOnClick()
     {
         // back to menu
+        gameManager.Resume();
         SceneManager.LoadScene(0);
     }
 }

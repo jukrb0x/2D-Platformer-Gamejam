@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,14 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool dash = false;
     [SerializeField] private bool canDash = false; // Player Dash Switch
+    [SerializeField] private GameManager gameManager;
 
     // bool dashAxis = false;
+
+    private void Start()
+    {
+        gameManager ??= GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
 
     void FixedUpdate()
     {
@@ -28,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.IsPaused) return;
+
         horizontalMoveSpeed = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMoveSpeed));

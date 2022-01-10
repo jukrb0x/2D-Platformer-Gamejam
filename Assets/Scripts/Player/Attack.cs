@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    private CharacterController2D player;
     public float dmgValue = 4;
+    public float powerValue = 1;
     public GameObject throwableObject;
     public Transform attackCheck;
     private Rigidbody2D _rigidbody2D;
@@ -13,6 +15,7 @@ public class Attack : MonoBehaviour
     public bool canAttack = true;
     public bool canThrow = false;
     public bool isTimeToCheck = false;
+    [SerializeField] private GameManager gameManager;
 
     public GameObject cam;
 
@@ -24,11 +27,15 @@ public class Attack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager ??= GameObject.Find("Game Manager").GetComponent<GameManager>();
+        player ??= GameObject.Find("Player").GetComponent<CharacterController2D>(); //todo tag
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.IsPaused) return;
+
         // sword attack
         if (Input.GetKeyDown(KeyCode.J) && canAttack)
         {
@@ -41,17 +48,21 @@ public class Attack : MonoBehaviour
         // throwable attack
         if (Input.GetKeyDown(KeyCode.K) && canThrow)
         {
-            Transform objTransform = transform;
+            if (player.power <= 0) return;
+            // deduct power from player
+            player.SendMessage("UsePower", this.powerValue);
 
+            Transform objTransform = transform;
             // instantiate a throwable
+            var localScale = -objTransform.localScale;
             GameObject throwableWeapon =
                 Instantiate(throwableObject,
-                    objTransform.position + new Vector3(objTransform.localScale.x * 0.5f, -0.2f),
+                    objTransform.position + new Vector3(localScale.x * 0.5f, 1f),
                     Quaternion.identity);
-
+            throwableWeapon.transform.localScale = new Vector2(-localScale.x, 1);
             // set direction of the throwable 
-            Vector2 direction = new Vector2(objTransform.localScale.x, 0);
-            throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction;
+            Vector2 direction = new Vector2(localScale.x, 0);
+            throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction; // < 0 facing right
             throwableWeapon.name = "ThrowableWeapon";
         }
     }

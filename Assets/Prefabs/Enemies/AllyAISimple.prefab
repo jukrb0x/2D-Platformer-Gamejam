@@ -111,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19daed33242bbb348a96213765c8bc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  scoreAward: 5
   currentFacingRight: 0
   life: 15
   speed: 5
@@ -121,7 +123,7 @@ MonoBehaviour:
   rangeDist: 5
   canDash: 0
   dmgValue: 4
-  throwableObject: {fileID: 5532974359214069763, guid: c928b20c45c6dcd458c1b9a8c6226d54, type: 3}
+  throwableObject: {fileID: 5532974359214069763, guid: 395b7510d8708499e88f9f1679f31c34, type: 3}
 --- !u!212 &212832719579855464
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -160,7 +162,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 305394147
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f2ed27d6c1c3ccc48959bcca269d88f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

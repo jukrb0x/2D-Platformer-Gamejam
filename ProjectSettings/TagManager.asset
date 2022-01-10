@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Score
   layers:
   - Default
   - TransparentFX
@@ -48,9 +49,12 @@ TagManager:
   - name: Level
     uniqueID: 598724481
     locked: 0
+  - name: UI
+    uniqueID: 2930948079
+    locked: 0
   - name: Player
     uniqueID: 305394147
     locked: 0
-  - name: UI
-    uniqueID: 2930948079
+  - name: HUD
+    uniqueID: 284659749
     locked: 0
