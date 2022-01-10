@@ -4,6 +4,7 @@ using UnityEngine;
 public class Key : MonoBehaviour
 {
     private GameManager gameManager;
+    private KeyType _keyType;
 
     private void Start()
     {
@@ -12,10 +13,14 @@ public class Key : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        // TODO pass level
-        if (col.CompareTag("Player"))
-        {
+        if (!col.CompareTag("Player")) return;
+        if (_keyType == KeyType.winnerKey)
             gameManager.IsWon = true;
-        }
+    }
+
+    enum KeyType
+    {
+        winnerKey,
+        nextLevelKey
     }
 }

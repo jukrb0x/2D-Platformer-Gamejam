@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class CharacterController2D : MonoBehaviour
 {
+    private GameManager gameManager;
     [SerializeField] private float jumpForce = 400f; // Amount of force added when the player jumps.
     [Range(0, .3f)] [SerializeField] private float movementSmoothing = .05f; // How much to smooth out the movement
     [SerializeField] private bool airControl = false; // Whether or not a player can steer while jumping;
@@ -37,6 +38,8 @@ public class CharacterController2D : MonoBehaviour
     public float power = 10f;
     private float maxLife;
     private float maxPower = 10f;
+    [SerializeField] private int retry = 0;
+    [SerializeField] private int maxRetry = 3;
     public bool invincible = false; // If player can die
 
     public bool isGodModeOn = false;
@@ -71,6 +74,7 @@ public class CharacterController2D : MonoBehaviour
     {
         maxLife = life;
         maxPower = power;
+        gameManager ??= FindObjectOfType<GameManager>();
     }
 
 
@@ -325,7 +329,7 @@ public class CharacterController2D : MonoBehaviour
             life += val;
         }
     }
-    
+
     public void AddPower(float val)
     {
         if (power + val >= maxPower)
@@ -402,6 +406,19 @@ public class CharacterController2D : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         _rigidbody2D.velocity = new Vector2(0, _rigidbody2D.velocity.y);
         yield return new WaitForSeconds(1.1f);
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        // one life, one death
+        // toggle death menu
+        gameManager.IsDead = true;
+        gameManager.Pause();
+
+        //     if(this.retry < 3)
+        //     {
+        //         this.retry++;
+        //         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        //     }
+        //     else
+        //     {
+        //         SceneManager.LoadSceneAsync(0);
+        //     }
     }
 }

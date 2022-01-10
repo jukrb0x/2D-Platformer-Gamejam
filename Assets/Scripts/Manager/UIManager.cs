@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -8,6 +9,8 @@ public class UIManager : MonoBehaviour
     private CharacterController2D player;
     private GameObject pauseMenu;
     private GameObject winnerMenu;
+    private GameObject gameOverMenu;
+    private TextMeshProUGUI scoreBar;
     [SerializeField] private GameManager gameManager;
 
 
@@ -19,6 +22,8 @@ public class UIManager : MonoBehaviour
         player ??= GameObject.Find("Player").GetComponent<CharacterController2D>(); //todo tag
         pauseMenu ??= GameObject.Find("Pause Menu");
         winnerMenu ??= GameObject.Find("Winner Menu");
+        gameOverMenu ??= GameObject.Find("GameOver Menu");
+        scoreBar ??= GameObject.Find("Score Bar").GetComponent<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -27,18 +32,19 @@ public class UIManager : MonoBehaviour
         powerBar.SetMaxPower(player.power);
         pauseMenu.SetActive(false);
         winnerMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
     }
 
     private void Update()
     {
         UpdateHealthBar(player.life);
         UpdatePowerBar(player.power);
-
+        UpdateScoreBar(gameManager.Score);
         // receive keyboard input
 
         // isWon -> winnerMenu
         // TODO isDead -> gameOverMenu
-        if (!gameManager.IsWon && Input.GetKeyDown(KeyCode.Escape))
+        if (!gameManager.IsDead && !gameManager.IsWon && Input.GetKeyDown(KeyCode.Escape))
         {
             if (!gameManager.IsPaused)
             {
@@ -56,6 +62,11 @@ public class UIManager : MonoBehaviour
             gameManager.Pause();
             ShowWinnerMenu();
         }
+        else if (gameManager.IsDead)
+        {
+            gameManager.Pause();
+            ShowGameOverMenu();
+        }
     }
 
     // routines
@@ -67,6 +78,11 @@ public class UIManager : MonoBehaviour
     private void UpdatePowerBar(float power)
     {
         powerBar.SetPower(power);
+    }
+
+    private void UpdateScoreBar(int score)
+    {
+        scoreBar.text = $"Score: {score}";
     }
 
     // pause menu
@@ -84,5 +100,18 @@ public class UIManager : MonoBehaviour
     private void ShowWinnerMenu()
     {
         winnerMenu.SetActive(true);
+        SetScoreOnUI();
+    }
+
+    private void ShowGameOverMenu()
+    {
+        gameOverMenu.SetActive(true);
+        SetScoreOnUI();
+    }
+
+    private void SetScoreOnUI()
+    {
+        TextMeshProUGUI scoreText = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
+        if (scoreText != null) scoreText.text = $"Score: {gameManager.Score}";
     }
 }

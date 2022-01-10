@@ -90,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 1458107173046890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.025, y: -3.351, z: 0}
-  m_LocalScale: {x: -1, y: 1.0000001, z: 1}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_Children:
   - {fileID: 4921565249646226}
   - {fileID: 4850398340925330}
@@ -112,7 +112,7 @@ MonoBehaviour:
   life: 10
   turnLayerMask:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 1
   facingRight: 1
   speed: 5
   isInvincible: 0
@@ -154,7 +154,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 305394147
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f2ed27d6c1c3ccc48959bcca269d88f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

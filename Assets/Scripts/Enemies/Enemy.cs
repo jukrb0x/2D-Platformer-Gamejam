@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private int scoreAward = 5;
     public float life = 10;
     private bool isPlat;
     private bool isObstacle;
@@ -23,6 +26,11 @@ public class Enemy : MonoBehaviour
         fallCheck = transform.Find("FallCheck");
         wallCheck = transform.Find("WallCheck");
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        gameManager ??= FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -78,6 +86,10 @@ public class Enemy : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.AddForce(new Vector2(direction * 500f, 100f));
         StartCoroutine(HitTime());
+        if (life <= 0)
+        {
+            gameManager.Score += scoreAward; // add score to player
+        }
     }
 
     void OnCollisionStay2D(Collision2D collision)

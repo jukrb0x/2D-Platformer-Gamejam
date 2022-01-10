@@ -23,6 +23,6 @@ public class PauseMenuController : MonoBehaviour
     {
         // back to menu
         gameManager.OnLoadTheScene();
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene(0);
     }
 }

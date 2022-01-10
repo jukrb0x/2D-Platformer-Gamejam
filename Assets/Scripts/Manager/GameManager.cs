@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public bool IsPaused { get; set; }
     public bool IsWon { get; set; }
+    public bool IsDead { get; set; }
+
+    public int Score {get; set;}
 
     private GameController gameController; // will be added to the GameObject automatically
     private Collider2D player;
@@ -14,6 +17,7 @@ public class GameManager : MonoBehaviour
     {
         gameController = GetComponent<GameController>();
         IsPaused = false;
+        Time.timeScale = 1;
         // make frame per second 45
         Application.targetFrameRate = 45;
     }
