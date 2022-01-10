@@ -4,6 +4,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     private HealthBarController healthBar;
+    private PowerBarController powerBar;
     private CharacterController2D player;
     private GameObject pauseMenu;
     private GameObject winnerMenu;
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
     {
         gameManager ??= GameObject.Find("Game Manager").GetComponent<GameManager>();
         healthBar ??= GameObject.Find("Health Bar").GetComponent<HealthBarController>();
+        powerBar ??= GameObject.Find("Power Bar").GetComponent<PowerBarController>();
         player ??= GameObject.Find("Player").GetComponent<CharacterController2D>();
         pauseMenu ??= GameObject.Find("Pause Menu");
         winnerMenu ??= GameObject.Find("Winner Menu");
@@ -22,6 +24,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         healthBar.SetMaxHealth(player.life);
+        powerBar.SetMaxPower(player.power);
         pauseMenu.SetActive(false);
         winnerMenu.SetActive(false);
     }
@@ -29,9 +32,10 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         UpdateHealthBar(player.life);
+        UpdatePowerBar(player.power);
 
         // receive keyboard input
-        
+
         // isWon -> winnerMenu
         // TODO isDead -> gameOverMenu
         if (!gameManager.IsWon && Input.GetKeyDown(KeyCode.Escape))
@@ -58,6 +62,11 @@ public class UIManager : MonoBehaviour
     private void UpdateHealthBar(float health)
     {
         healthBar.SetHealth(health);
+    }
+
+    private void UpdatePowerBar(float power)
+    {
+        powerBar.SetPower(power);
     }
 
     // pause menu

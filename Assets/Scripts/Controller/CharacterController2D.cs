@@ -34,6 +34,7 @@ public class CharacterController2D : MonoBehaviour
     private bool canCheck = false; // For check if player is wallsliding
 
     public float life = 10f; // Life of the player
+    public float power = 10f;
     public bool invincible = false; // If player can die
     public bool isGodModeOn = false;
     private bool canMove = true; // If player can move
@@ -302,6 +303,12 @@ public class CharacterController2D : MonoBehaviour
             StartCoroutine(Stun(0.25f));
             StartCoroutine(MakeInvincible(1f));
         }
+    }
+
+    public void UsePower(float powerVal)
+    {
+        if(this.power < powerVal || powerVal <= 0 || isGodModeOn) return;
+        this.power -= powerVal;
     }
 
     IEnumerator DashCooldown()

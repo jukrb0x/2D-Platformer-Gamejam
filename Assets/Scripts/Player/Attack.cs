@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    private CharacterController2D player;
     public float dmgValue = 4;
+    public float powerValue = 1;
     public GameObject throwableObject;
     public Transform attackCheck;
     private Rigidbody2D _rigidbody2D;
@@ -26,6 +28,7 @@ public class Attack : MonoBehaviour
     void Start()
     {
         gameManager ??= GameObject.Find("Game Manager").GetComponent<GameManager>();
+        player ??= GameObject.Find("Player").GetComponent<CharacterController2D>();
     }
 
     // Update is called once per frame
@@ -45,8 +48,11 @@ public class Attack : MonoBehaviour
         // throwable attack
         if (Input.GetKeyDown(KeyCode.K) && canThrow)
         {
-            Transform objTransform = transform;
+            if (player.power <= 0) return;
+            // deduct power from player
+            player.SendMessage("UsePower", this.powerValue);
 
+            Transform objTransform = transform;
             // instantiate a throwable
             var localScale = -objTransform.localScale;
             GameObject throwableWeapon =
