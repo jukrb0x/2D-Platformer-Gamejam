@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1062824802085219857}
   - component: {fileID: 3146861532713242868}
   - component: {fileID: 360654684766388063}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: golden coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 598724481
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -8233117393859442524, guid: 29853c974512d4747a6493627fc45400, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -132,3 +132,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa159616b4524424a669f2d32045f904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinType: 0

@@ -16,8 +16,11 @@ public class Key : MonoBehaviour
         if (!col.CompareTag("Player")) return;
         if (_keyType == KeyType.winnerKey)
             gameManager.IsWon = true;
-        if(_keyType == KeyType.nextLevelKey)
+        if (_keyType == KeyType.nextLevelKey)
+        {
+            GameObject.Find("Game Data").GetComponent<GameData>().SaveScore(gameManager.Score);
             gameManager.EnterNextLevel();
+        }
     }
 
     enum KeyType

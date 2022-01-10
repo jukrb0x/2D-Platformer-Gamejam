@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour
     public bool IsWon { get; set; }
     public bool IsDead { get; set; }
 
-    public int Score {get; set;}
+    public int Score { get; set; }
 
     private GameController gameController; // will be added to the GameObject automatically
     private Collider2D player;
+
 
     private void Start()
     {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         // make frame per second 45
         Application.targetFrameRate = 45;
+        if (GameObject.Find("Game Data").GetComponent<GameData>() != null)
+            Score = GameObject.Find("Game Data").GetComponent<GameData>().ReadScore();
     }
 
     public void EnterNextLevel()
