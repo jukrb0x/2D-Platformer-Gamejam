@@ -35,7 +35,10 @@ public class CharacterController2D : MonoBehaviour
 
     public float life = 10f; // Life of the player
     public float power = 10f;
+    private float maxLife;
+    private float maxPower = 10f;
     public bool invincible = false; // If player can die
+
     public bool isGodModeOn = false;
     private bool canMove = true; // If player can move
 
@@ -62,6 +65,12 @@ public class CharacterController2D : MonoBehaviour
         animator = GetComponent<Animator>();
         OnFallEvent ??= new UnityEvent(); // when OnFallEvent == null
         OnLandEvent ??= new UnityEvent();
+    }
+
+    private void Start()
+    {
+        maxLife = life;
+        maxPower = power;
     }
 
 
@@ -305,9 +314,33 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
+    public void AddHealth(float val)
+    {
+        if (life + val >= maxLife)
+        {
+            life = maxLife;
+        }
+        else
+        {
+            life += val;
+        }
+    }
+    
+    public void AddPower(float val)
+    {
+        if (power + val >= maxPower)
+        {
+            power = maxPower;
+        }
+        else
+        {
+            power += val;
+        }
+    }
+
     public void UsePower(float powerVal)
     {
-        if(this.power < powerVal || powerVal <= 0 || isGodModeOn) return;
+        if (this.power < powerVal || powerVal <= 0 || isGodModeOn) return;
         this.power -= powerVal;
     }
 

@@ -28,7 +28,7 @@ public class Attack : MonoBehaviour
     void Start()
     {
         gameManager ??= GameObject.Find("Game Manager").GetComponent<GameManager>();
-        player ??= GameObject.Find("Player").GetComponent<CharacterController2D>();
+        player ??= GameObject.Find("Player").GetComponent<CharacterController2D>(); //todo tag
     }
 
     // Update is called once per frame

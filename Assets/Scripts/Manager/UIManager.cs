@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
         gameManager ??= GameObject.Find("Game Manager").GetComponent<GameManager>();
         healthBar ??= GameObject.Find("Health Bar").GetComponent<HealthBarController>();
         powerBar ??= GameObject.Find("Power Bar").GetComponent<PowerBarController>();
-        player ??= GameObject.Find("Player").GetComponent<CharacterController2D>();
+        player ??= GameObject.Find("Player").GetComponent<CharacterController2D>(); //todo tag
         pauseMenu ??= GameObject.Find("Pause Menu");
         winnerMenu ??= GameObject.Find("Winner Menu");
     }
