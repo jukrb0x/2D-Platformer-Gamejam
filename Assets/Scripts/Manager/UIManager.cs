@@ -31,6 +31,9 @@ public class UIManager : MonoBehaviour
         UpdateHealthBar(player.life);
 
         // receive keyboard input
+        
+        // isWon -> winnerMenu
+        // TODO isDead -> gameOverMenu
         if (!gameManager.IsWon && Input.GetKeyDown(KeyCode.Escape))
         {
             if (!gameManager.IsPaused)
